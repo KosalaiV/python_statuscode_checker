@@ -18,8 +18,9 @@ session = requests.Session()
 # Extract URLs from the Excel file
 urls = df.iloc[:, 0].tolist()
 
-# List to store failed URLs
+# Lists to store failed and passed URLs
 failed_urls = []
+passed_urls = []
 
 # Process each URL and handle exceptions
 def process_url(url):
@@ -32,6 +33,7 @@ def process_url(url):
             failed_urls.append(url)
         else:
             print(f"PASS: {response.status_code}")
+            passed_urls.append(url)
     except requests.exceptions.RequestException as e:
         print(f"ERROR: {url} - {e}")
         failed_urls.append(url)
@@ -47,3 +49,9 @@ with ThreadPoolExecutor(max_workers=num_threads) as executor:
 # Create a DataFrame with failed URLs and save to Excel
 df_failed_urls = pd.DataFrame(failed_urls)
 df_failed_urls.to_excel(output_file, index=False, header=False)
+
+# Count the number of failed URLs and passed URLs
+num_failed_urls = len(failed_urls)
+num_passed_urls = len(passed_urls)
+print(f"Failed URLs: {num_failed_urls}")
+print(f"Passed URLs: {num_passed_urls}")
