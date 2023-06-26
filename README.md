@@ -9,7 +9,7 @@ URL Checker is a Python script that checks the status of URLs listed in an Excel
 
  1. **Clone the repository:**
 
-    ```git clone https://github.com/your-username/url-checker.git ```
+    ```git clone https://github.com/KosalaiV/python_statuscode_checker.git```
 
 
  2. **Install the required dependencies:**
